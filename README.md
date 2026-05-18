@@ -233,15 +233,15 @@ BEACON/
 
 ## Roadmap
 
-Active development is tracked via [GitHub Issues](../../issues). The plan targets publishable quality (>86% entity F1 on the cleaned benchmark):
+Full details, rationale, and longer-term directions are in [ROADMAP.md](ROADMAP.md). The plan targets publishable quality (>86% entity F1 on the cleaned benchmark):
 
 | Phase | Status | Goal |
 |-------|--------|------|
 | **0 – Baseline Sweep** | 🔄 In Progress | Train 6 BERT-CRF variants on v1 corpus; establish baselines |
-| **Phase 1 – Dataset Cleanup** | 📋 Planned | BIO repair, null-token removal, document segmentation, duplicate-grouped splits |
-| **Phase 2 – Adjudication** | 📋 Planned | Human review of 1,985 cross-source annotation conflicts |
-| **Phase 3 – Rare Class Augmentation** | 📋 Planned | Back-translation / paraphrase for 10 STIX types with <300 training instances |
-| **Phase 4 – Publication Run** | 📋 Planned | DeBERTa-v3-large on cleaned corpus; ablation study; paper submission |
+| **Phase 1 – Dataset Cleanup** | 📋 Planned | BIO repair, null-token removal, document segmentation, duplicate-grouped splits → v2 corpus |
+| **Phase 2 – Adjudication** | 📋 Planned | LLM-assisted resolution of 1,985 cross-source annotation conflicts + human spot-check |
+| **Phase 3 – Rare Class Augmentation** | 📋 Planned | LLM-generated synthetic data for 10 STIX types with <300 training instances |
+| **Phase 4 – Publication Run** | 📋 Planned | DeBERTa-v3-large on cleaned corpus; ablation study (v1→v2, cleanup, adjudication, augmentation); paper submission |
 
 ---
 
