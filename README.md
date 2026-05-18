@@ -7,7 +7,13 @@
 
 **BEACON** is a research project building a high-quality, unified cybersecurity Named Entity Recognition (NER) benchmark. It harmonizes four heterogeneous cybersecurity corpora under the [STIX 2.1](https://oasis-open.github.io/cti-documentation/stix/intro) ontology, systematically audits and repairs dataset quality issues, and benchmarks BERT-CRF transformer variants under rigorous, reproducible conditions.
 
-> **Citing prior work**: BEACON builds on and acknowledges [APTNER](https://github.com/), [CyNER](https://github.com/), [DNRTI](https://github.com/), and [Attacker](https://github.com/) datasets. Our contribution is the harmonization pipeline, quality audit + repair, unified benchmark splits, and model training framework. All source datasets retain their original licenses.
+> **Built on prior work**: BEACON is the extended benchmark edition of our own [CyberNER](https://arxiv.org/abs/2510.26499) paper (IEEE TrustCom 2025). The harmonized corpus was constructed from four publicly released cybersecurity NER datasets:
+> - **CyNER** — [aiforsec/CyNER](https://github.com/aiforsec/CyNER) · MIT License · Alam et al., arXiv:2204.05754
+> - **DNRTI** — Wang et al., IEEE TrustCom 2020 · DOI:[10.1109/TrustCom50675.2020.00252](https://doi.org/10.1109/TrustCom50675.2020.00252)
+> - **APTNER** — [wangxuren/APTNER](https://github.com/wangxuren/APTNER) · Wang et al., IEEE CSCWD 2022 · DOI:[10.1109/CSCWD54268.2022.9776031](https://doi.org/10.1109/CSCWD54268.2022.9776031)
+> - **AttackER** — Deka et al., arXiv:2408.05149 · DOI:[10.48550/arXiv.2408.05149](https://doi.org/10.48550/arXiv.2408.05149)
+>
+> Our contributions are the quality audit + repair pipeline, extended benchmark splits, and the multi-model BERT-CRF training framework. **All source datasets retain their original licenses** (see [License](#license)).
 
 ---
 
@@ -78,12 +84,12 @@ Cybersecurity NER is fragmented: every corpus uses its own incompatible entity s
 
 Each source's original labels are mapped to STIX 2.1 types via a documented pipeline in [`notebooks/0_data_merging.ipynb`](notebooks/0_data_merging.ipynb). The harmonized label is stored in the `STIX_Tag` column; the original source label is preserved in `Tag`.
 
-| Source | Key Mappings |
-|--------|-------------|
-| APTNER | `APT→Threat-Actor`, `MAL→Malware`, `TOOL→Tool`, `FILE→File`, `IP→IPv4-Addr`, `ACT→Attack-Pattern`, `TIME/ENCR→O` |
-| CyNER | `Malware→Malware`, `System→Software`, `Organization→Identity`, `Indicator→Indicator`, `Vulnerability→Vulnerability` |
-| DNRTI | `HackOrg→Threat-Actor`, `SamFile→Malware`, `Features→Malware-Analysis`, `Exp→Vulnerability`, `Way/OffAct→Attack-Pattern`, `Time/Purp→O` |
-| Attacker | `VICTIM_IDENTITY/GENERAL_IDENTITY→Identity`, `ATTACK_TOOL→Tool`, `MALWARE→Malware`, `CAMPAIGN→Campaign`, `IMPACT/MOTIVATION→O` |
+| Source | Repository / Paper | Key Mappings |
+|--------|--------------------|-------------|
+| APTNER | [wangxuren/APTNER](https://github.com/wangxuren/APTNER) · [Wang et al. 2022](https://doi.org/10.1109/CSCWD54268.2022.9776031) | `APT→Threat-Actor`, `MAL→Malware`, `TOOL→Tool`, `FILE→File`, `IP→IPv4-Addr`, `ACT→Attack-Pattern`, `TIME/ENCR→O` |
+| CyNER | [aiforsec/CyNER](https://github.com/aiforsec/CyNER) · [Alam et al. 2022](https://doi.org/10.48550/arXiv.2204.05754) | `Malware→Malware`, `System→Software`, `Organization→Identity`, `Indicator→Indicator`, `Vulnerability→Vulnerability` |
+| DNRTI | [Wang et al. 2020](https://doi.org/10.1109/TrustCom50675.2020.00252) | `HackOrg→Threat-Actor`, `SamFile→Malware`, `Features→Malware-Analysis`, `Exp→Vulnerability`, `Way/OffAct→Attack-Pattern`, `Time/Purp→O` |
+| AttackER | [Deka et al. 2024](https://doi.org/10.48550/arXiv.2408.05149) | `VICTIM_IDENTITY/GENERAL_IDENTITY→Identity`, `ATTACK_TOOL→Tool`, `MALWARE→Malware`, `CAMPAIGN→Campaign`, `IMPACT/MOTIVATION→O` |
 
 ### Known Quality Issues (being addressed — see Roadmap)
 
@@ -252,17 +258,81 @@ If you use BEACON in your research, please cite (preprint forthcoming):
 }
 ```
 
-Please also cite the original datasets:
+BEACON extends our earlier work. If you use the harmonized corpus, please also cite:
 
 ```bibtex
-@dataset{aptner,   title={APTNER},           ... }
-@dataset{cyner,    title={CyNER},            ... }
-@dataset{dnrti,    title={DNRTI},            ... }
-@dataset{attacker, title={Attacker NER},     ... }
+@inproceedings{cyberner2025,
+  title     = {{CyberNER}: A Harmonized {STIX} Corpus for Cybersecurity Named Entity Recognition},
+  author    = {Ech-Chammakhy, Yasir and Motii, Anas and Rabii, Anass and Azrara, Oussama and Chbili, Jaafar},
+  booktitle = {Proceedings of the 24th IEEE International Conference on Trust, Security and Privacy
+               in Computing and Communications (TrustCom 2025)},
+  year      = {2025},
+  doi       = {10.48550/arXiv.2510.26499},
+  url       = {https://arxiv.org/abs/2510.26499}
+}
+```
+
+Please also cite the original source datasets:
+
+```bibtex
+@inproceedings{cyner2022,
+  title     = {{CyNER}: A Python Library for Cybersecurity Named Entity Recognition},
+  author    = {Alam, Md Tanvirul and Bhusal, Dipkamal and Park, Youngja and Rastogi, Nidhi},
+  year      = {2022},
+  doi       = {10.48550/arXiv.2204.05754},
+  url       = {https://arxiv.org/abs/2204.05754}
+}
+
+@inproceedings{dnrti2020,
+  title     = {{DNRTI}: A Large-Scale Dataset for Named Entity Recognition in Threat Intelligence},
+  author    = {Wang, Xuren and Liu, Xiaofeng and Ao, Shuai and Li, Nan and Jiang, Zhangwei
+               and Xu, Zhengxin and Xiong, Zihan and Mengbo, Xin and Zhang, Xun},
+  booktitle = {2020 IEEE 19th International Conference on Trust, Security and Privacy
+               in Computing and Communications (TrustCom)},
+  pages     = {1632--1639},
+  year      = {2020},
+  publisher = {IEEE},
+  doi       = {10.1109/TrustCom50675.2020.00252}
+}
+
+@inproceedings{aptner2022,
+  title     = {{APTNER}: A Specific Dataset for {NER} Missions in Cyber Threat Intelligence Field},
+  author    = {Wang, Xuren and He, Songheng and Xiong, Zihan and Wei, Xinxin
+               and Jiang, Zhangwei and Chen, Sihan and Jiang, Jun},
+  booktitle = {2022 IEEE 25th International Conference on Computer Supported
+               Cooperative Work in Design (CSCWD)},
+  pages     = {1233--1238},
+  year      = {2022},
+  publisher = {IEEE},
+  doi       = {10.1109/CSCWD54268.2022.9776031}
+}
+
+@misc{attacker2024,
+  title     = {{AttackER}: Towards Enhancing Cyber-Attack Attribution with
+               a Named Entity Recognition Dataset},
+  author    = {Deka, Priyanka and Rajapaksha, Sanduni and Rani, Ritu
+               and Almutairi, Abeer and Karafili, Erisa},
+  year      = {2024},
+  doi       = {10.48550/arXiv.2408.05149},
+  url       = {https://arxiv.org/abs/2408.05149}
+}
 ```
 
 ---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+The BEACON code, training scripts, and benchmark infrastructure are released under the **MIT License** — see [LICENSE](LICENSE).
+
+### Source Dataset Licenses
+
+The harmonized corpus (`dataset/beacon_stix_v1.csv`) incorporates data derived from four source datasets. Their individual licenses are:
+
+| Dataset | License | Notes |
+|---------|---------|-------|
+| **CyNER** | [MIT](https://github.com/aiforsec/CyNER/blob/main/LICENSE.txt) (© 2022 aiforsec) | Permits use, modification, and redistribution with attribution |
+| **DNRTI** | Not specified | Original GitHub repository is no longer publicly available; cite the paper |
+| **APTNER** | Not specified | Authors request citation of their IEEE CSCWD 2022 paper; no OSS license was attached to the repository |
+| **AttackER** | Not specified | Released as a research preprint (arXiv:2408.05149); original repository not publicly available |
+
+> **Note**: For APTNER, DNRTI, and AttackER no explicit open-source license was attached to their repositories at the time of data collection. Their authors released the data for research use with the expectation of citation. If you redistribute or build commercially on the derived data, contact the original authors to clarify permissions. CyNER's MIT license explicitly permits this use with attribution.
