@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+*-venv/
+env/
+
+# Model weights and large binaries
+*.pt
+*.ckpt
+*.bin
+*.h5
+*.pkl
+*.npy
+*.model
+
+# Training output: smoke tests and per-run logs
+outputs/smoke/
+outputs/smoke_test.csv
+outputs/*.log
+outputs/**/*.log
+sweep.log
+
+# Jupyter
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Temporary and editor files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.code-workspace
+
+# Secrets
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+
+# Legacy absolute paths from previous environments
+/home/yasir.ech-chammakhy/
+
+# Tokenizer files saved alongside model checkpoints (downloadable from HuggingFace)
+outputs/*/tokenizer*.json
